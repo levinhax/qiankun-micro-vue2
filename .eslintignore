@@ -1,0 +1,6 @@
+# 不用校验的文件
+/public/*
+/dist/*
+.eslintrc.js
+.eslintcache
+commitlint.config.js

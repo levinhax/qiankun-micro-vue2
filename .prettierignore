@@ -1,0 +1,14 @@
+**/*.svg
+*.lock
+*.png
+package.json
+LICENSE
+.eslintrc.js
+.eslintignore
+.eslintcache
+.gitignore
+.prettierignore
+.history
+.huskyrc
+commitlint.config.js
+yarn-error.log
