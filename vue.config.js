@@ -1,6 +1,8 @@
 const packageName = require('./package.json').name;
 const path = require('path');
 const resolvePath = dir => path.resolve(__dirname, dir);
+const TerserPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/child/micro1/' : '/',
@@ -33,6 +35,25 @@ module.exports = {
         '@': resolvePath('src'),
       },
     },
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              pure_funcs: ['console.log'], //忽略console.log语句
+            },
+          },
+        }),
+      ],
+    },
+    plugins: [
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'disabled',
+        generateStatsFile: true,
+        statsFilename: '../analyzer/stats.json', // 相对于捆绑输出目录
+        statsOptions: { source: false },
+      }),
+    ],
     // 微应用的打包工具配置
     output: {
       // 微应用的包名，这里与主应用中注册的微应用名称一致

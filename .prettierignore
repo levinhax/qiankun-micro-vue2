@@ -12,3 +12,5 @@ LICENSE
 .huskyrc
 commitlint.config.js
 yarn-error.log
+/analyzer/*
+/dist/*

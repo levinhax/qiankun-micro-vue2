@@ -4,3 +4,4 @@
 .eslintrc.js
 .eslintcache
 commitlint.config.js
+/analyzer/*
