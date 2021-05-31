@@ -42,11 +42,11 @@ function render(props) {
 
   if (props) {
     // 注入 actions 实例
-    // console.log(props);
+    console.log(props);
     actions.setActions(props);
     props.onGlobalStateChange(state => {
       const { token } = state;
-      // console.log('Micro子应用渲染 token: ', token);
+      console.log('Micro子应用渲染 token: ', token);
       if (token) {
         window.localStorage.setItem('token', token);
       }

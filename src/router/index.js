@@ -6,10 +6,14 @@
 
 export const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     // component: Home,
     component: () => import('../views/Home.vue'),
+  },
+  {
+    path: '/',
+    redirect: '/home',
   },
   {
     path: '/about',
