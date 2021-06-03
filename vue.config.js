@@ -3,6 +3,9 @@ const path = require('path');
 const resolvePath = dir => path.resolve(__dirname, dir);
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
+const productionGzipExtensions = /\.(js|css|json|html)(\?.*)?$/i;
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 // 是否为生产环境
 const isProduction = process.env.NODE_ENV !== 'development';
@@ -80,6 +83,14 @@ module.exports = {
         generateStatsFile: true,
         statsFilename: '../analyzer/stats.json', // 相对于捆绑输出目录
         statsOptions: { source: false },
+      }),
+      new AntdDayjsWebpackPlugin(),
+      new CompressionPlugin({
+        filename: '[path][base].gz',
+        algorithm: 'gzip',
+        test: productionGzipExtensions,
+        threshold: 10240, // 只有大小大于该值的资源会被处理。单位是 bytes。默认值是 0。
+        minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理。默认值是 0.8。
       }),
     ],
     // 微应用的打包工具配置
