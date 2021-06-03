@@ -76,6 +76,50 @@ module.exports = {
           },
         }),
       ],
+      // 公共代码抽离
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            // 第三方库抽离
+            chunks: 'all',
+            test: /node_modules/,
+            // name: 'vendor',
+            name: 'chunk-vendor', // 改名chunk-vendor验证
+            minChunks: 1, // 在分割之前，这个代码块最小应该被引用的次数
+            maxInitialRequests: 5, // 入口点的最大并行请求数
+            minSize: 300000, // 依赖包超过300000bit将被单独打包
+            priority: 100, // 权重
+          },
+          common: {
+            // 公用模块抽离
+            chunks: 'all',
+            test: /[\\/]src[\\/]js[\\/]/,
+            name: 'common',
+            minChunks: 2, // 在分割之前，这个代码块最小应该被引用的次数
+            maxInitialRequests: 5,
+            minSize: 300000, // 依赖包超过300000bit将被单独打包
+            priority: 60, // 默认组的优先级为负，以允许自定义组获得更高的优先级（自定义组的默认值为 0 ）
+          },
+          styles: {
+            // 样式抽离
+            name: 'styles',
+            test: /\.(sa|sc|c|le)ss$/,
+            chunks: 'all',
+            enforce: true,
+          },
+          antDesignVue: {
+            name: 'chunk-ant-design-vue',
+            test: /[\\/]node_modules[\\/]ant-design-vue[\\/]/,
+            chunks: 'all',
+            priority: 200, // 值越大，权重越高
+            reuseExistingChunk: true,
+            enforce: true, // 忽略 splitChunks.minSize, minChunks, maxAsyncRequests, maxInitialRequests，总是为这个缓存组创建 chunks
+          },
+          runtimeChunk: {
+            name: 'manifest',
+          },
+        },
+      },
     },
     plugins: [
       new BundleAnalyzerPlugin({
