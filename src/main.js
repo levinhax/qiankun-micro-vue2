@@ -51,6 +51,7 @@ function render(props) {
         window.localStorage.setItem('token', token);
       }
     }, true);
+    // props.setGlobalState(props.state); // 子应用监听和修改数据
   }
 
   // 在 render 中创建 VueRouter，可以保证在卸载微应用时，移除 location 事件监听，防止事件污染
@@ -64,6 +65,11 @@ function render(props) {
   instance = new Vue({
     router,
     store,
+    data() {
+      return {
+        parentRouter: props?.prop_data?.router,
+      };
+    },
     render: h => h(App),
   }).$mount('#app');
 }
