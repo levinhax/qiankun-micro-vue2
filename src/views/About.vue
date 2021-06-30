@@ -3,6 +3,11 @@
     <h1>This is an about page</h1>
     <a-button type="primary" @click="showMessage">Primary</a-button>
     <a-button>Default</a-button>
+    <div>
+      <a-button type="primary" @click="showMessage"></a-button>
+      <a-button>Default</a-button>
+      <p>主项目的数据：{{ data_GlobalToken }}, 点击变为 child_</p>
+    </div>
   </div>
 </template>
 
@@ -20,6 +25,8 @@ export default {
       data_CurrentPageSize: 10,
       data_SelectItemIds: [],
       data_wsUrl: '',
+      isQiankun: window.__POWERED_BY_QIANKUN__,
+      data_GlobalToken: '',
     };
   },
   created() {
@@ -30,20 +37,21 @@ export default {
   },
   mounted() {
     // ========================== websocket ==========================
-    const token = localStorage.getItem('token');
-    const hostName = document.location.host;
-    const hostProtocol = document.location.protocol === 'http:' ? 'ws:' : 'wss:';
-    this.data_wsUrl =
-      process.env.NODE_ENV === 'production'
-        ? `${hostProtocol}//${hostName}/asset/ws/push?token=${token}`
-        : `ws://192.168.31.200:8080/asset/ws/push?token=${token}`;
-    // 建立socket连接
-    this.socketService.initWebSocket(this.data_wsUrl);
-    this.socketService.sendSock({}, this.updateState);
+    // const token = localStorage.getItem('token');
+    // const hostName = document.location.host;
+    // const hostProtocol = document.location.protocol === 'http:' ? 'ws:' : 'wss:';
+    // this.data_wsUrl =
+    //   process.env.NODE_ENV === 'production'
+    //     ? `${hostProtocol}//${hostName}/asset/ws/push?token=${token}`
+    //     : `ws://192.168.31.200:8080/asset/ws/push?token=${token}`;
+    // // 建立socket连接
+    // this.socketService.initWebSocket(this.data_wsUrl);
+    // this.socketService.sendSock({}, this.updateState);
+    // ========================== websocket ==========================
   },
   beforeDestroy() {
     // 组件销毁时主动关闭socket
-    this.socketService.webSocketClose();
+    // this.socketService.webSocketClose();
   },
   methods: {
     showMessage() {

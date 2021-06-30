@@ -52,6 +52,9 @@ function render(props) {
       }
     }, true);
     // props.setGlobalState(props.state); // 子应用监听和修改数据
+    props.setGlobalState({
+      token: 'aaa',
+    });
   }
 
   // 在 render 中创建 VueRouter，可以保证在卸载微应用时，移除 location 事件监听，防止事件污染
