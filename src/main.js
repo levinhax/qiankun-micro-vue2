@@ -45,10 +45,13 @@ function render(props) {
     console.log(props);
     actions.setActions(props);
     props.onGlobalStateChange(state => {
-      const { token } = state;
-      console.log('Micro子应用渲染 token: ', token);
+      const { token, qiankun_GlobalName } = state;
+      console.log('Micro子应用渲染 token: ', token, qiankun_GlobalName);
       if (token) {
         window.localStorage.setItem('token', token);
+      }
+      if (qiankun_GlobalName) {
+        store.commit('homeStore/setStoreHomeName', qiankun_GlobalName)
       }
     }, true);
   }
