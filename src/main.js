@@ -51,7 +51,7 @@ function render(props) {
         window.localStorage.setItem('token', token);
       }
       if (qiankun_GlobalName) {
-        store.commit('homeStore/setStoreHomeName', qiankun_GlobalName)
+        store.commit('homeStore/setStoreHomeName', qiankun_GlobalName);
       }
     }, true);
   }
