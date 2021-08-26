@@ -23,6 +23,11 @@ export const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
+  {
+    path: '/form-mix',
+    name: 'formMix',
+    component: () => import(/* webpackChunkName: "form-mix" */ '../views/Form/form-mix.vue'),
+  },
 ];
 
 // const router = new VueRouter({

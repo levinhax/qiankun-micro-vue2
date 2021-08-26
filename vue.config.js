@@ -31,6 +31,17 @@ const isProduction = process.env.NODE_ENV !== 'development';
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/child/micro1/' : '/',
   productionSourceMap: false,
+  css: {
+    // extract: process.env.NODE_ENV === 'production',
+    extract: false, // css打包进js文件，防止子应用加载样式异常
+    // loaderOptions: {
+    //   less: {
+    //     lessOptions: {
+    //       javascriptEnabled: true,
+    //     },
+    //   },
+    // },
+  },
   devServer: {
     // host: '0.0.0.0',
     port: 9001,
