@@ -161,6 +161,9 @@ module.exports = {
     },
   },
   chainWebpack: config => {
+    if (isProduction) {
+      console.log('chainWebpack: ', config);
+    }
     // config.plugins.delete('prefetch'); // 预先加载模块 关闭
     // config.plugin('html').tap(args => {
     //   // 生产环境或本地需要cdn时，才注入cdn
@@ -170,19 +173,20 @@ module.exports = {
     //   return args;
     // });
 
-    if (isProduction) {
-      config.module
-        .rule('images')
-        .use('image-webpack-loader')
-        .loader('image-webpack-loader')
-        .options({
-          mozjpeg: { progressive: true, quality: 65 },
-          optipng: { enabled: false },
-          pngquant: { quality: [0.65, 0.9], speed: 4 },
-          gifsicle: { interlaced: false },
-          // webp: { quality: 75 }
-        })
-        .end();
-    }
+    // 图片压缩 image-webpack-loader
+    // if (isProduction) {
+    //   config.module
+    //     .rule('images')
+    //     .use('image-webpack-loader')
+    //     .loader('image-webpack-loader')
+    //     .options({
+    //       mozjpeg: { progressive: true, quality: 65 },
+    //       optipng: { enabled: false },
+    //       pngquant: { quality: [0.65, 0.9], speed: 4 },
+    //       gifsicle: { interlaced: false },
+    //       // webp: { quality: 75 }
+    //     })
+    //     .end();
+    // }
   },
 };
