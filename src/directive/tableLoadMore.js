@@ -3,7 +3,6 @@ export default {
   inserted(el, binding, vnode) {
     let lastPotion = 0;
     const scrollWrap = el.querySelector('.ant-table-body');
-    console.log('scrollWrap: ', scrollWrap);
 
     scrollWrap.onscroll = function () {
       const distanceRelativeToBottom = this.scrollHeight - this.scrollTop - this.clientHeight;

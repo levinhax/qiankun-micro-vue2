@@ -61,7 +61,6 @@ export default {
       this.loading = true;
       setTimeout(() => {
         const res = allData.slice((page - 1) * limit, page * limit);
-        console.log('res: ', res);
         this.tableData.push(...res);
         this.loading = false;
       }, 200);
