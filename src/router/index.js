@@ -2,6 +2,8 @@
 // import VueRouter from 'vue-router';
 // import Home from '../views/Home.vue';
 
+import tableRoute from './modules/table';
+
 // Vue.use(VueRouter);
 
 export const routes = [
@@ -28,6 +30,7 @@ export const routes = [
     name: 'formMix',
     component: () => import(/* webpackChunkName: "form-mix" */ '../views/Form/form-mix.vue'),
   },
+  ...tableRoute,
 ];
 
 // const router = new VueRouter({

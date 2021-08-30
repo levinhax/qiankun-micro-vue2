@@ -20,6 +20,10 @@ Vue.use(Http);
 import socketService from './utils/socket';
 Vue.prototype.socketService = socketService;
 
+// directive 自定义指令
+import { directive } from './directive';
+directive();
+
 Vue.config.productionTip = false;
 
 // new Vue({
