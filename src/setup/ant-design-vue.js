@@ -13,6 +13,7 @@ import {
   message,
   Modal,
   Table,
+  Spin,
 } from 'ant-design-vue';
 
 Vue.component(Button.name, Button);
@@ -26,6 +27,7 @@ Vue.component(Select.Option.name, Select.Option);
 Vue.component(Layout.name, Layout);
 Vue.component(Menu.name, Menu);
 Vue.component(Table.name, Table);
+Vue.component(Spin.name, Spin);
 
 Vue.prototype.$message = message;
 Vue.prototype.$Modal = Modal;

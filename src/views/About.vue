@@ -1,18 +1,32 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <a-button type="primary" @click="showMessage">Primary</a-button>
-    <a-button>Default</a-button>
-    <div>
-      <a-button type="primary" @click="showMessage"></a-button>
+    <div class="item-content websocket-content">
+      <a-button type="primary" @click="showMessage" style="margin-right: 8px">Primary</a-button>
       <a-button>Default</a-button>
-      <p>主项目的数据：{{ data_GlobalToken }}, 点击变为 child_</p>
+    </div>
+    <div class="item-content select-content">
+      <h4>滚动加载选择器</h4>
+      <a-select :value="data_SelectValue" style="width: 240px" @popupScroll="handleSelectMore">
+        <a-spin v-if="data_SelectLoading" slot="notFoundContent" size="small" />
+        <a-select-option v-for="d in data_SelectOptions" :key="d.key">
+          {{ d.label }}
+        </a-select-option>
+      </a-select>
     </div>
   </div>
 </template>
 
 <script>
 import { helperFilterEmptyParam } from '../utils/helperFn';
+
+const selectOptions = [];
+for (let i = 0; i < 100; i++) {
+  selectOptions.push({
+    key: i,
+    label: `option  ${i}`,
+  });
+}
 
 export default {
   name: 'About',
@@ -27,6 +41,12 @@ export default {
       data_wsUrl: '',
       isQiankun: window.__POWERED_BY_QIANKUN__,
       data_GlobalToken: '',
+      data_SelectOptions: [],
+      data_SelectValue: '',
+      data_SelectLoading: false,
+      data_SelectPageIndex: 1,
+      data_SelectPageSize: 10,
+      data_SelectPageTotal: 10,
     };
   },
   created() {
@@ -34,6 +54,8 @@ export default {
       orderField: 'create_time',
       isAsc: false,
     };
+
+    this.getOptionsData(this.data_SelectPageIndex, this.data_SelectPageSize);
   },
   mounted() {
     // ========================== websocket ==========================
@@ -87,6 +109,34 @@ export default {
         this.data_Total = total;
       }
     },
+    async getOptionsData(page, limit) {
+      if (page > this.data_SelectPageTotal) {
+        return false;
+      }
+      setTimeout(() => {
+        const res = selectOptions.slice((page - 1) * limit, page * limit);
+        this.data_SelectOptions.push(...res);
+        this.loading = false;
+      }, 200);
+    },
+    handleSelectMore() {
+      if (this.data_SelectPageIndex < this.data_SelectPageTotal) {
+        this.data_SelectPageIndex += 1;
+        this.getOptionsData(this.data_SelectPageIndex, this.data_SelectPageSize);
+      }
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.about {
+  padding: 24px 32px;
+
+  .item-content {
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 1px dotted #e1e1e1;
+  }
+}
+</style>
