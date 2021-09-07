@@ -51,6 +51,7 @@ export default {
       total: 100,
       page: 1,
       limit: 10,
+      direction: 'down',
     };
   },
   created() {
@@ -62,6 +63,16 @@ export default {
       setTimeout(() => {
         const res = allData.slice((page - 1) * limit, page * limit);
         this.tableData.push(...res);
+        // if (this.direction === 'down') {
+        //   const tableData = this.data_TableData.slice(-this.data_PageSize);
+        //   tableData.push(...res);
+        //   this.data_TableData = tableData;
+        //   console.log('data_TableData: ', this.data_TableData);
+        // } else {
+        //   const tableData = this.data_TableData.slice(0, this.data_PageSize);
+        //   tableData.unshift(...res);
+        //   this.data_TableData = tableData;
+        // }
         this.loading = false;
       }, 200);
     },
@@ -69,12 +80,14 @@ export default {
       if (val.direction === 'down' && val.distanceRelativeToBottom <= 0) {
         if (this.page < Math.ceil(this.total / this.limit)) {
           this.page++;
+          this.direction = 'down';
           this.getTableData(this.page, this.limit);
         }
       }
 
       if (val.direction === 'up' && val.scrollTop === 0) {
         this.page = 1;
+        this.direction = 'up';
         this.tableData = [];
         this.getTableData(this.page, this.limit);
       }

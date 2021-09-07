@@ -7,6 +7,11 @@ export default {
     scrollWrap.onscroll = function () {
       const distanceRelativeToBottom = this.scrollHeight - this.scrollTop - this.clientHeight;
       const direction = getDirection(lastPotion, this.scrollTop);
+      if (direction === 'down' && distanceRelativeToBottom === 0) {
+        this.scrollTop = 1;
+      } else if (direction === 'up' && this.scrollTop === 0) {
+        this.scrollTop = distanceRelativeToBottom - 1;
+      }
       lastPotion = this.scrollTop;
       binding.value({
         direction,
