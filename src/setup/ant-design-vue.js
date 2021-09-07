@@ -2,6 +2,7 @@ import Vue from 'vue';
 
 import {
   // need
+  ConfigProvider,
   Button,
   Form,
   FormModel,
@@ -14,7 +15,10 @@ import {
   Modal,
   Table,
   Spin,
+  Pagination,
 } from 'ant-design-vue';
+
+Vue.use(ConfigProvider);
 
 Vue.component(Button.name, Button);
 Vue.component(Form.name, Form);
@@ -28,6 +32,7 @@ Vue.component(Layout.name, Layout);
 Vue.component(Menu.name, Menu);
 Vue.component(Table.name, Table);
 Vue.component(Spin.name, Spin);
+Vue.component(Pagination.name, Pagination);
 
 Vue.prototype.$message = message;
 Vue.prototype.$Modal = Modal;
