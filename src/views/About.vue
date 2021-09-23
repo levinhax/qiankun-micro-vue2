@@ -14,6 +14,10 @@
         </a-select-option>
       </a-select>
     </div>
+    <div class="item-content router-content">
+      <h4>子应用跳转</h4>
+      <a-button @click="handleToMicro2App">点击跳转</a-button>
+    </div>
   </div>
 </template>
 
@@ -124,6 +128,13 @@ export default {
         this.data_SelectPageIndex += 1;
         this.getOptionsData(this.data_SelectPageIndex, this.data_SelectPageSize);
       }
+    },
+    handleToMicro2App() {
+      const fromView = 'micro1';
+      const state = {};
+      const title = '';
+      const url = `/micro2/about?fromView=${fromView}`;
+      history.pushState(state, title, url);
     },
   },
 };
