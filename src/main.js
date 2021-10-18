@@ -62,6 +62,10 @@ function render(props) {
     props.setGlobalState({
       token: 'aaa',
     });
+
+    // 公共函数
+    // Vue.prototype.helperLog = props.helperLog;
+    Vue.prototype.ComUtils = props.ComUtils;
   }
 
   // 在 render 中创建 VueRouter，可以保证在卸载微应用时，移除 location 事件监听，防止事件污染

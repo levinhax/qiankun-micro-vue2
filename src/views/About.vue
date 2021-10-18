@@ -60,6 +60,9 @@ export default {
     };
 
     this.getOptionsData(this.data_SelectPageIndex, this.data_SelectPageSize);
+
+    // this.helperLog();
+    this.ComUtils.helperLog();
   },
   mounted() {
     // ========================== websocket ==========================
