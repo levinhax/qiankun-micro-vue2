@@ -4,6 +4,7 @@
 
 import tableRoute from './modules/table';
 import chartRoute from './modules/chart';
+import virtualRoute from './modules/virtual';
 
 // Vue.use(VueRouter);
 
@@ -33,6 +34,7 @@ export const routes = [
   },
   ...tableRoute,
   ...chartRoute,
+  ...virtualRoute,
 ];
 
 // const router = new VueRouter({
