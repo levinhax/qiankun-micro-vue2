@@ -1,0 +1,11 @@
+/* 浅色模式 */
+html[data-theme='light']:root {
+  --body-background: #f0f2f5;
+  --text-color: #333;
+}
+
+/* 深色模式 */
+html[data-theme='dark']:root {
+  --body-background: #000;
+  --text-color: #ededed;
+}

@@ -16,6 +16,15 @@ export default {
       locale: zhCN,
     };
   },
+  mounted() {
+    // this.toggleTheme();
+  },
+  methods: {
+    toggleTheme(isDarkMode = false) {
+      const htmlEl = document.documentElement;
+      htmlEl.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    },
+  },
 };
 </script>
 

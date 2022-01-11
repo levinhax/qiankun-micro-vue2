@@ -8,6 +8,9 @@ import VueRouter from 'vue-router';
 import store from './store';
 import Http from './utils/http.js';
 
+import './styles/theme.css';
+import './styles/index.css';
+
 import { routes } from './router';
 Vue.use(VueRouter);
 
