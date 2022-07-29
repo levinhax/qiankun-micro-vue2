@@ -3,6 +3,8 @@ import Vue from 'vue';
 import {
   // need
   ConfigProvider,
+  Row,
+  Col,
   Button,
   Form,
   FormModel,
@@ -20,6 +22,8 @@ import {
 
 Vue.use(ConfigProvider);
 
+Vue.component(Row.name, Row);
+Vue.component(Col.name, Col);
 Vue.component(Button.name, Button);
 Vue.component(Form.name, Form);
 Vue.component(FormModel.name, FormModel);

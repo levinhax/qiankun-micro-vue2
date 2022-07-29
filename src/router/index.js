@@ -32,6 +32,22 @@ export const routes = [
     name: 'formMix',
     component: () => import(/* webpackChunkName: "form-mix" */ '../views/Form/form-mix.vue'),
   },
+  {
+    path: '/nav',
+    name: 'Nav',
+    component: () => import('../views/Nav'),
+  },
+  {
+    path: '/assets-chart',
+    name: 'assetsChart',
+    component: () => import(/* webpackChunkName: "assets-chart" */ '../views/Chart/assets-chart'),
+  },
+  {
+    path: '/db-distribution',
+    name: 'db-distribution',
+    component: () =>
+      import(/* webpackChunkName: "db-distribution" */ '../views/Chart/db-distribution'),
+  },
   ...tableRoute,
   ...chartRoute,
   ...virtualRoute,
