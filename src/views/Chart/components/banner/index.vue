@@ -17,8 +17,8 @@
         </div>
       </div>
     </div>
-    <div class="prev-btn">&lt;</div>
-    <div class="next-btn">&gt;</div>
+    <div class="prev-btn" @click="handlePlayPrev">&lt;</div>
+    <div class="next-btn" @click="handlePlayNext">&gt;</div>
   </div>
 </template>
 
@@ -67,54 +67,98 @@ export default {
         {
           dbType: 'MYSQL',
           count: 6,
-          tableCount: 5230,
+          tableCount: 6230,
           percent: '25%',
         },
         {
           dbType: 'MYSQL',
           count: 7,
-          tableCount: 5230,
+          tableCount: 7230,
           percent: '25%',
         },
         {
           dbType: 'MYSQL',
           count: 8,
-          tableCount: 5230,
+          tableCount: 8230,
           percent: '25%',
         },
       ],
     },
   },
   mounted() {
+    setTimeout(() => {
+      console.log(5);
+    });
+    this.$nextTick(() => {
+      console.log(2);
+      this.$nextTick(() => {
+        console.log(3);
+      });
+    });
+    setTimeout(() => {
+      console.log(1);
+    });
+    setTimeout(() => {
+      console.log(4);
+    });
     this.$nextTick(() => {
       this.handleAutoPlay();
     });
   },
   methods: {
     handlePlay() {
+      // const len = Math.floor(this.propList.length / 2);
       const slideList = document.getElementsByClassName('slider-list')[0];
       this.data_PlayInd++;
       slideList.style.left = -this.data_PlayInd * (844 + 24) + 'px';
       slideList.style.transition = 'all 1.2s';
-      if (this.data_PlayInd >= 3) {
-        this.data_PlayInd = -1;
-        setTimeout(() => {
-          slideList.style.left = 0;
-          slideList.style.transition = 'none';
-        }, 3000);
+      if (this.data_PlayInd >= 4) {
+        this.data_PlayInd = 0;
+        slideList.style.left = 0;
+        slideList.style.transition = 'none';
       }
 
-      //   slideList.addEventListener('mouseenter', () => {
-      //     clearInterval(this.timer);
-      //   });
-      //   slideList.addEventListener('mouseleave', () => {
-      //     this.handleAutoPlay();
-      //   });
+      // 显示/隐藏
+      // const slideListItems = document.getElementsByClassName('slider-list-item');
+      // for (let i = 0; i < 8; i++) {
+      //   slideListItems[i].style.display = 'none';
+      // }
+      // if (this.data_PlayInd >= 4) {
+      //   this.data_PlayInd = 0;
+      // }
+      // slideListItems[2 * this.data_PlayInd].style.display = 'block';
+      // slideListItems[2 * this.data_PlayInd + 1].style.display = 'block';
+
+      // slideList.addEventListener('mouseenter', () => {
+      //   clearInterval(this.timer);
+      //   this.timer = null;
+      // });
+      // slideList.addEventListener('mouseleave', () => {
+      //   this.handleAutoPlay();
+      // });
     },
     handleAutoPlay() {
       this.timer = setInterval(() => {
         this.handlePlay();
       }, 3000);
+    },
+    handlePlayNext() {
+      clearInterval(this.timer);
+      this.timer = null;
+      this.data_PlayInd++;
+      if (this.data_PlayInd >= 4) {
+        this.data_PlayInd = 0;
+      }
+      this.handleAutoPlay();
+    },
+    handlePlayPrev() {
+      clearInterval(this.timer);
+      this.timer = null;
+      this.data_PlayInd--;
+      if (this.data_PlayInd <= 0) {
+        this.data_PlayInd = 0;
+      }
+      this.handleAutoPlay();
     },
   },
 };
@@ -209,6 +253,7 @@ export default {
     left: 0;
     top: 20px;
     z-index: 1000;
+    cursor: pointer;
   }
   .next-btn {
     color: red;

@@ -106,13 +106,43 @@ export default {
           },
           axisLabel: {
             interval: 0,
-            width: 50,
-            overflow: 'break',
+            // width: 50,
+            // overflow: 'break',
             margin: 32,
             align: 'center',
             fontFamily: 'PingFangSC-Regular',
             fontSize: '12px',
             color: '#606061',
+
+            formatter: function (params) {
+              var newParamsName = '';
+              var paramsNameNumber = params.length;
+              var provideNumber = 5; //一行显示几个字
+              var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+              if (paramsNameNumber > provideNumber) {
+                //两行展示
+                for (var p = 0; p < 2; p++) {
+                  var tempStr = '';
+                  var start = p * provideNumber;
+                  var end = start + provideNumber;
+                  if (p == rowNumber - 1) {
+                    tempStr = params.substring(start, paramsNameNumber);
+                  } else {
+                    tempStr = params.substring(start, end) + '\n';
+                  }
+                  newParamsName += tempStr;
+                }
+                // 换行时....
+                if (newParamsName.length > 10) {
+                  newParamsName = newParamsName.substring(0, newParamsName.length - 2) + '...' + '';
+                }
+              } else {
+                newParamsName = params;
+              }
+              // 调取生成浮窗的函数
+              // this.extension(that.chart)
+              return newParamsName;
+            },
           },
           nameTextStyle: {
             align: 'center',
@@ -120,7 +150,7 @@ export default {
           },
           data: [
             '县政务数据办',
-            '县文化旅游体育局',
+            '县文化旅游体育局体育局体育局',
             '县农业农村局',
             '县民政局',
             '嘉善县交投集团',
